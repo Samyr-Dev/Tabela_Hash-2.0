@@ -39,10 +39,12 @@ public class HashTable {
         return null;
     }
 
+
     public boolean remover(String cpf) {
         int pos = hash(cpf);
         return tabela[pos].removeIf(p -> p.getCpf().equals(cpf));
     }
+
 
     public void imprimirTabela() {
         for (int i = 0; i < tamanho; i++) {
