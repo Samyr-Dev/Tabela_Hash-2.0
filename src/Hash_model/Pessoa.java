@@ -1,6 +1,6 @@
 package Hash_model;
 
-public class Pessoa {
+public class Pessoa implements ValidarCPF {
     private String cpf;
     private String nome;
     private int idade;
@@ -21,6 +21,18 @@ public class Pessoa {
 
     public int getIdade() {
         return idade;
+    }
+
+    @Override
+    public Boolean validadorCPF(){
+        if (cpf != null && cpf.length() == 11){
+            return true;
+        }
+        else {
+            System.out.println("CPF inválido. Verifique a quantidade de dígitos.");
+            return false;
+        }
+
     }
 
     @Override

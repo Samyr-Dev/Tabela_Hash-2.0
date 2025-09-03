@@ -12,7 +12,15 @@ public class Main {
         int opcao;
 
 
-        do {
+        for (int i = 00; i < 30; i++) {
+            String cpf = String.format("%011d", i);
+            System.out.println("                ");
+            System.out.println("CPF " + i + " de teste: " + cpf +".");
+            tabela.inserir(new Pessoa(cpf, "Pessoa" + i, 20 + (i % 10)));
+
+        }
+
+        while (true) {
             System.out.println("\nMenu:");
             System.out.println("1 - Inserir pessoa");
             System.out.println("2 - Buscar pessoa");
@@ -21,44 +29,56 @@ public class Main {
             System.out.println("0 - Sair");
             System.out.print("Escolha: ");
             opcao = scanner.nextInt();
-            scanner.nextLine(); // consumir quebra de linha
+            scanner.nextLine();
+
+            if (opcao == 1) {
+                System.out.print("Digite o CPF: ");
+                String cpf = scanner.nextLine();
+                System.out.print("Digite o Nome: ");
+                String nome = scanner.nextLine();
+                System.out.print("Digite a Idade: ");
+                int idade = scanner.nextInt();
+
+                scanner.nextLine();
+                tabela.inserir(new Pessoa(cpf, nome, idade));
 
 
-            switch (opcao) {
-                case 1:
-                    System.out.print("CPF: ");
-                    String cpf = scanner.nextLine();
-                    System.out.print("Nome: ");
-                    String nome = scanner.nextLine();
-                    System.out.print("Idade: ");
-                    int idade = scanner.nextInt();
-                    scanner.nextLine();
-                    tabela.inserir(new Pessoa(cpf, nome, idade));
-                    break;
-                case 2:
-                    System.out.print("Informe o CPF para busca: ");
-                    String buscaCpf = scanner.nextLine();
-                    Pessoa p = tabela.buscar(buscaCpf);
-                    System.out.println(p != null ? p : "Não encontrado.");
-                    break;
-                case 3:
-                    System.out.print("Informe o CPF para remover: ");
-                    String removeCpf = scanner.nextLine();
-                    boolean removido = tabela.remover(removeCpf);
-                    System.out.println(removido ? "Removido." : "Não encontrado.");
-                    break;
-                case 4:
-                    tabela.imprimirTabela();
-                    break;
-                case 0:
-                    System.out.println("Saindo...");
-                    break;
-                default:
-                    System.out.println("Opção inválida!");
+            } else if (opcao == 2) {
+
+                System.out.print("Informe o CPF para busca: ");
+                String buscaCpf = scanner.nextLine();
+                Pessoa p = tabela.buscar(buscaCpf);
+                if (p != null && p.validadorCPF() == true) {
+                    System.out.println(p);
+                } else {
+                    System.out.println("Não encontrado. Verifique se o cadastro existe ou se a quantidade de dígitos está correta.");
+                }
+
+            } else if (opcao == 3) {
+                System.out.print("Informe o CPF para remover: ");
+                String removeCpf = scanner.nextLine();
+                boolean removido = tabela.remover(removeCpf);
+                if (removido == true) {
+                    System.out.println("CPF removido com sucesso!");
+                } else {
+                    System.out.println("CPF não encontrado, digite um CPF já cadastrado ou verifique a quantidade de dígitos!");
+                }
+
+            } else if (opcao == 4) {
+                tabela.imprimirTabela();
+
+            } else if (opcao == 0) {
+                System.out.println("Saindo...");
+                break;
             }
-        } while (opcao != 0);
 
+             else {
+                System.out.println("Opção inválida!");
+            }
+        }
+        while (opcao != 0) ;
 
         scanner.close();
     }
 }
+
