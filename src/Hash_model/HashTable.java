@@ -30,7 +30,7 @@ public class HashTable {
             } else {
                 for (Pessoa p : tabela[pos]) {
                     if (p.getCpf().equals(pessoa.getCpf())) {
-                        System.out.println("CPF já cadastrado, colissão à vista!");
+                        System.out.println("CPF já cadastrado, colisão à vista!");
                     }
                 }
                     if (!tabela[pos].isEmpty()) {
