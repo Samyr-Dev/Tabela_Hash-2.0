@@ -24,7 +24,7 @@ public class Pessoa implements ValidarCPF {
     }
 
     @Override
-    public Boolean validadorCPF(){
+    public boolean validadorCPF(){
         if (cpf != null && cpf.length() == 11){
             return true;
         }
